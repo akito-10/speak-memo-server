@@ -1,3 +1,7 @@
+import { MEMOS } from "src/db/memo";
+
 export const getMemos = {
-  handler: () => {},
+  handler: () => {
+    return MEMOS;
+  },
 };
