@@ -9,6 +9,7 @@
     "elysia": "latest"
   },
   "devDependencies": {
+    "@elysiajs/swagger": "^0.7.3",
     "bun-types": "latest"
   },
   "module": "src/index.js"
