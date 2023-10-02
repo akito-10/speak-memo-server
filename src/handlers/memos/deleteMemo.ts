@@ -1,21 +1,13 @@
 import { t } from "elysia";
-import { MEMOS } from "src/db/memo";
+import { db } from "src";
 
 export const deleteMemo = {
-  handler: ({ params: { id } }: { params: { id: string } }) => {
-    const memo = MEMOS.find((memo) => memo.id === id);
-
-    if (!memo) {
-      return {};
-    }
-
-    MEMOS.splice(MEMOS.indexOf(memo), 1);
-
-    return MEMOS;
+  handler: async ({ params: { id } }: { params: { id: number } }) => {
+    return await db.memo.delete({ where: { id } });
   },
   hook: {
     params: t.Object({
-      id: t.String(),
+      id: t.Number(),
     }),
   },
 };
