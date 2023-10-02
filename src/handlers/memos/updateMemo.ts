@@ -1,25 +1,27 @@
 import { t } from "elysia";
-import { MEMOS } from "src/db/memo";
+import { db } from "src";
+import { transformStringToNumberParamsId } from "src/utils/transformStringToNumberParamsId";
 
 export const updateMemo = {
-  handler: ({
+  handler: async ({
     params: { id },
     body,
   }: {
-    params: { id: string };
+    params: { id: number };
     body: { title: string; content: string };
   }) => {
-    const memo = MEMOS.find((memo) => memo.id === id);
-
-    if (!memo) {
-      return {};
-    }
-
-    return { ...memo, ...body, updatedAt: new Date() };
+    return await db.memo.update({
+      where: { id },
+      data: {
+        ...body,
+        updatedAt: new Date(),
+      },
+    });
   },
   hook: {
+    transform: transformStringToNumberParamsId,
     params: t.Object({
-      id: t.String(),
+      id: t.Number(),
     }),
     body: t.Object({
       title: t.String(),
