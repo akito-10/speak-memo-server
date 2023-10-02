@@ -8,4 +8,5 @@ export const memos = new Elysia({ prefix: "/memos" })
   .get("/", getMemos.handler)
   .get("/:id", getMemoById.handler, getMemoById.hook)
   .post("/", createMemo.handler, createMemo.hook)
-  .put("/:id", updateMemo.handler, updateMemo.hook);
+  .put("/:id", updateMemo.handler, updateMemo.hook)
+  .delete("/:id", () => {});
