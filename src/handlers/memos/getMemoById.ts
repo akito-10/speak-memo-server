@@ -1,13 +1,15 @@
 import { t } from "elysia";
-import { MEMOS } from "src/db/memo";
+import { db } from "src";
+import { transformStringToNumberParamsId } from "src/utils/transformStringToNumberParamsId";
 
 export const getMemoById = {
-  handler: ({ params: { id } }: { params: { id: string } }) => {
-    return MEMOS.find((memo) => memo.id === id) || [];
+  handler: async ({ params: { id } }: { params: { id: number } }) => {
+    return await db.memo.findUnique({ where: { id } });
   },
   hook: {
+    transform: transformStringToNumberParamsId,
     params: t.Object({
-      id: t.String(),
+      id: t.Number(),
     }),
   },
 };
