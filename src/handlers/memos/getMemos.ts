@@ -1,7 +1,7 @@
-import { MEMOS } from "src/db/memo";
+import { db } from "src";
 
 export const getMemos = {
-  handler: () => {
-    return MEMOS;
+  handler: async () => {
+    return await db.memo.findMany();
   },
 };
