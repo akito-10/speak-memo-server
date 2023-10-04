@@ -1,6 +1,6 @@
 import { t } from "elysia";
 import { db } from "src";
-import { CreateMemoDto } from "src/dto/createMemoDto";
+import { CreateMemoDto } from "src/dto/memos/createMemoDto";
 
 export const createMemo = {
   handler: async ({ body }: { body: CreateMemoDto }) => {

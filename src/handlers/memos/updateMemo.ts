@@ -1,5 +1,6 @@
 import { t } from "elysia";
 import { db } from "src";
+import { UpdateMemoDto } from "src/dto/memos/updateMemoDto";
 import { transformStringToNumberParamsId } from "src/utils/transformStringToNumberParamsId";
 
 export const updateMemo = {
@@ -8,7 +9,7 @@ export const updateMemo = {
     body,
   }: {
     params: { id: number };
-    body: { title: string; content: string };
+    body: UpdateMemoDto;
   }) => {
     return await db.memo.update({
       where: { id },
