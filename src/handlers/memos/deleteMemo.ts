@@ -11,5 +11,8 @@ export const deleteMemo = {
     params: t.Object({
       id: t.Number(),
     }),
+    detail: {
+      tags: ["Memos"],
+    },
   },
 };

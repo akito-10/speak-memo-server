@@ -11,5 +11,8 @@ export const createMemo = {
       title: t.String(),
       content: t.String(),
     }),
+    detail: {
+      tags: ["Memos"],
+    },
   },
 };

@@ -20,5 +20,8 @@ export const createUser = {
 
       body.password = password;
     },
+    detail: {
+      tags: ["Users"],
+    },
   },
 };

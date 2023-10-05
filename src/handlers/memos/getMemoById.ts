@@ -11,5 +11,8 @@ export const getMemoById = {
     params: t.Object({
       id: t.Number(),
     }),
+    detail: {
+      tags: ["Memos"],
+    },
   },
 };

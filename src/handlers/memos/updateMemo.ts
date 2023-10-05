@@ -28,5 +28,8 @@ export const updateMemo = {
       title: t.String(),
       content: t.String(),
     }),
+    detail: {
+      tags: ["Memos"],
+    },
   },
 };

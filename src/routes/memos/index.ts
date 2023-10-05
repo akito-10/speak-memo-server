@@ -6,7 +6,7 @@ import { getMemos } from "src/handlers/memos/getMemos";
 import { updateMemo } from "src/handlers/memos/updateMemo";
 
 export const memos = new Elysia({ prefix: "/memos" })
-  .get("/", getMemos.handler)
+  .get("/", getMemos.handler, getMemos.hook)
   .get("/:id", getMemoById.handler, getMemoById.hook)
   .post("/", createMemo.handler, createMemo.hook)
   .put("/:id", updateMemo.handler, updateMemo.hook)
