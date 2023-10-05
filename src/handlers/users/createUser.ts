@@ -3,8 +3,22 @@ import { db } from "src";
 import { CreateUserDto } from "src/dto/users/createUserDto";
 
 export const createUser = {
-  handler: async ({ body }: { body: CreateUserDto }) => {
-    return await db.user.create({ data: body });
+  handler: async ({ body, jwt }: { body: CreateUserDto; jwt: any }) => {
+    const user = await db.user.create({ data: body });
+
+    if (!user) {
+      throw new Error("Cannot create user");
+    }
+
+    const token = await jwt.sign(
+      { id: user.id },
+      {
+        httpOnly: true,
+        maxAge: 7 * 86400,
+      }
+    );
+
+    return { token };
   },
   hook: {
     body: t.Object({
