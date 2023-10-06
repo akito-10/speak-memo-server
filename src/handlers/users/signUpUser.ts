@@ -1,9 +1,9 @@
 import { t } from "elysia";
 import { db } from "src";
-import { CreateUserDto } from "src/dto/users/createUserDto";
+import { SignUpUserDto } from "src/dto/users/signUpUserDto";
 
-export const createUser = {
-  handler: async ({ body, jwt }: { body: CreateUserDto; jwt: any }) => {
+export const signUpUser = {
+  handler: async ({ body, jwt }: { body: SignUpUserDto; jwt: any }) => {
     const user = await db.user.create({ data: body });
 
     if (!user) {
@@ -26,7 +26,7 @@ export const createUser = {
       email: t.String(),
       password: t.String(),
     }),
-    transform: async ({ body }: { body: CreateUserDto }) => {
+    transform: async ({ body }: { body: SignUpUserDto }) => {
       const password = await Bun.password.hash(body.password, {
         algorithm: "bcrypt",
         cost: 10,

@@ -1,7 +1,7 @@
 import jwt from "@elysiajs/jwt";
 import Elysia from "elysia";
-import { createUser } from "src/handlers/users/createUser";
-import { loginUser } from "src/handlers/users/loginUser";
+import { signInUser } from "src/handlers/users/signInUser";
+import { signUpUser } from "src/handlers/users/signUpUser";
 
 export const users = new Elysia({ prefix: "/users" })
   .use(
@@ -10,5 +10,5 @@ export const users = new Elysia({ prefix: "/users" })
       secret: Bun.env.JWT_SECRET || "",
     })
   )
-  .post("/", createUser.handler, createUser.hook)
-  .post("/login", loginUser.handler, loginUser.hook);
+  .post("/", signUpUser.handler, signUpUser.hook)
+  .post("/login", signInUser.handler, signInUser.hook);

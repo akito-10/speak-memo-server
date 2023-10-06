@@ -1,9 +1,9 @@
 import { t } from "elysia";
 import { db } from "src";
-import { LoginUserDto } from "src/dto/users/loginUserDto";
+import { SignInUserDto } from "src/dto/users/signInUserDto";
 
-export const loginUser = {
-  handler: async ({ body, jwt }: { body: LoginUserDto; jwt: any }) => {
+export const signInUser = {
+  handler: async ({ body, jwt }: { body: SignInUserDto; jwt: any }) => {
     const user = await db.user.findUnique({
       where: { email: body.email },
     });
