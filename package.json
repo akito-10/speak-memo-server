@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@elysiajs/swagger": "^0.7.3",
+    "@sinclair/typebox": "^0.31.17",
     "bun-types": "latest",
     "prisma": "^5.3.1"
   },
