@@ -1,6 +1,6 @@
-import { t } from "elysia";
 import { db } from "src";
-import { UpdateMemoDto } from "src/dto/memos/updateMemoDto";
+import { memoIdSchema } from "src/models/memos/memoParams";
+import { UpdateMemoDto, updateMemoSchema } from "src/models/memos/updateMemo";
 import { transformStringToNumberParamsId } from "src/utils/transformStringToNumberParamsId";
 
 export const updateMemo = {
@@ -21,13 +21,8 @@ export const updateMemo = {
   },
   hook: {
     transform: transformStringToNumberParamsId,
-    params: t.Object({
-      id: t.Number(),
-    }),
-    body: t.Object({
-      title: t.String(),
-      content: t.String(),
-    }),
+    params: memoIdSchema,
+    body: updateMemoSchema,
     detail: {
       tags: ["Memos"],
     },
