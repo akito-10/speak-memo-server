@@ -4,7 +4,11 @@ import { transformStringToNumberParamsId } from "src/utils/transformStringToNumb
 
 export const getMemoById = {
   handler: async ({ params: { id } }: { params: { id: number } }) => {
-    return await db.memo.findUnique({ where: { id } });
+    const memo = await db.memo.findUnique({ where: { id } });
+
+    if (!memo) throw new Error("該当するメモが存在しません");
+
+    return memo;
   },
   hook: {
     transform: transformStringToNumberParamsId,

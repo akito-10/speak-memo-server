@@ -4,7 +4,7 @@ import { UserType, userSchema } from "src/models/users/user";
 
 export const createMemo = {
   handler: async ({ body, user }: { body: CreateMemoDto; user?: UserType }) => {
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error("ユーザーが存在しません");
 
     return await db.memo.create({ data: { ...body, userId: user.id } });
   },

@@ -16,7 +16,7 @@ export const signupUser = {
     const user = await db.user.create({ data: body });
 
     if (!user) {
-      throw new Error("Cannot create user");
+      throw new Error("ユーザーの作成に失敗しました");
     }
 
     setCookie("auth", await jwt.sign({ id: user.id }), {

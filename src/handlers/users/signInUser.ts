@@ -18,7 +18,7 @@ export const signInUser = {
     });
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("ユーザーが存在しません");
     }
 
     const isPasswordValid = await Bun.password.verify(
@@ -27,7 +27,7 @@ export const signInUser = {
     );
 
     if (!isPasswordValid) {
-      throw new Error("Invalid password");
+      throw new Error("パスワードが間違っています");
     }
 
     setCookie("auth", await jwt.sign({ id: user.id }), {
