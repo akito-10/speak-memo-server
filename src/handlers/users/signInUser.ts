@@ -1,6 +1,6 @@
 import { t } from "elysia";
 import { db } from "src";
-import { SignInUserDto } from "src/dto/users/signInUserDto";
+import { SignInUserDto, signInUserSchema } from "src/models/users/signInUser";
 
 export const signInUser = {
   handler: async ({ body, jwt }: { body: SignInUserDto; jwt: any }) => {
@@ -32,10 +32,7 @@ export const signInUser = {
     return { token };
   },
   hook: {
-    body: t.Object({
-      email: t.String(),
-      password: t.String(),
-    }),
+    body: signInUserSchema,
     detail: {
       tags: ["Users"],
     },
