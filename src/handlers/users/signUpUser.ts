@@ -1,4 +1,3 @@
-import { t } from "elysia";
 import { db } from "src";
 import { SignupUserDto, signupUserSchema } from "src/models/users/signupUser";
 

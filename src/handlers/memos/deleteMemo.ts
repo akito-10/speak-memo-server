@@ -1,5 +1,5 @@
-import { t } from "elysia";
 import { db } from "src";
+import { memoIdSchema } from "src/models/memos/memoParams";
 import { transformStringToNumberParamsId } from "src/utils/transformStringToNumberParamsId";
 
 export const deleteMemo = {
@@ -8,9 +8,7 @@ export const deleteMemo = {
   },
   hook: {
     transform: transformStringToNumberParamsId,
-    params: t.Object({
-      id: t.Number(),
-    }),
+    params: memoIdSchema,
     detail: {
       tags: ["Memos"],
     },
