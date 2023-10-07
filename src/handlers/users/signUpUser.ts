@@ -2,22 +2,29 @@ import { db } from "src";
 import { SignupUserDto, signupUserSchema } from "src/models/users/signupUser";
 
 export const signupUser = {
-  handler: async ({ body, jwt }: { body: SignupUserDto; jwt: any }) => {
+  handler: async ({
+    body,
+    jwt,
+    cookie,
+    setCookie,
+  }: {
+    body: SignupUserDto;
+    jwt: any;
+    cookie: any;
+    setCookie: any;
+  }) => {
     const user = await db.user.create({ data: body });
 
     if (!user) {
       throw new Error("Cannot create user");
     }
 
-    const token = await jwt.sign(
-      { id: user.id },
-      {
-        httpOnly: true,
-        maxAge: 7 * 86400,
-      }
-    );
+    setCookie("auth", await jwt.sign({ id: user.id }), {
+      httpOnly: true,
+      maxAge: 7 * 86400,
+    });
 
-    return { token };
+    return { token: cookie.auth };
   },
   hook: {
     body: signupUserSchema,

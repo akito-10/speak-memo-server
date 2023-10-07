@@ -2,7 +2,17 @@ import { db } from "src";
 import { SignInUserDto, signInUserSchema } from "src/models/users/signInUser";
 
 export const signInUser = {
-  handler: async ({ body, jwt }: { body: SignInUserDto; jwt: any }) => {
+  handler: async ({
+    body,
+    jwt,
+    cookie,
+    setCookie,
+  }: {
+    body: SignInUserDto;
+    jwt: any;
+    cookie: any;
+    setCookie: any;
+  }) => {
     const user = await db.user.findUnique({
       where: { email: body.email },
     });
@@ -20,15 +30,12 @@ export const signInUser = {
       throw new Error("Invalid password");
     }
 
-    const token = await jwt.sign(
-      { id: user.id },
-      {
-        httpOnly: true,
-        maxAge: 7 * 86400,
-      }
-    );
+    setCookie("auth", await jwt.sign({ id: user.id }), {
+      httpOnly: true,
+      maxAge: 7 * 86400,
+    });
 
-    return { token };
+    return { token: cookie.auth };
   },
   hook: {
     body: signInUserSchema,
